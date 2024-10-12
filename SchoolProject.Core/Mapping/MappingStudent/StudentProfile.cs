@@ -10,6 +10,7 @@ namespace SchoolProject.Core.Mapping.MappingStudent
             GetStudentByIdMapping();
             AddStudentCommandMapping();
             EditStudentCommandMapping();
+            GetStudentListPaginationMapping();
         }
     }
 }

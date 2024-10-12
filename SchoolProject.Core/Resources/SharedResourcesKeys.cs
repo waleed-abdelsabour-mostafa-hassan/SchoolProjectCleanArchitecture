@@ -15,6 +15,8 @@
         public const string UnprocessableEntity = "UnprocessableEntity";
         public const string MaxLength100 = "MaxLength100";
         public const string IsExist = "IsExist";
+        public const string IsNotExist = "IsNotExist";
+        public const string DepartmentId = "DepartmentId";
 
 
 

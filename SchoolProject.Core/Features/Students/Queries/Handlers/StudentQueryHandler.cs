@@ -6,9 +6,7 @@ using SchoolProject.Core.Features.Students.Queries.Models;
 using SchoolProject.Core.Features.Students.Queries.Results;
 using SchoolProject.Core.Resources;
 using SchoolProject.Core.Wrappers;
-using SchoolProject.Data.Entities;
 using SchoolProject.Services.Abstracts;
-using System.Linq.Expressions;
 
 namespace SchoolProject.Core.Features.Students.Queries.Handlers
 {
@@ -56,12 +54,14 @@ namespace SchoolProject.Core.Features.Students.Queries.Handlers
             }
         }
 
-        public Task<PaginatedResult<GetStudentPaginatedListResponse>> Handle(GetStudentPaginatedListQuery request, CancellationToken cancellationToken)
+        public async Task<PaginatedResult<GetStudentPaginatedListResponse>> Handle(GetStudentPaginatedListQuery request, CancellationToken cancellationToken)
         {
-            Expression<Func<Student, GetStudentPaginatedListResponse>> expression = e => new GetStudentPaginatedListResponse(e.Id, e.Localize(e.NameAr, e.NameEn), e.Localize(e.AddressAr, e.AddressEn), e.Phone, e.Localize(e.Department.NameAr, e.Department.NameEn));
+            //Expression<Func<Student, GetStudentPaginatedListResponse>> expression = e => new GetStudentPaginatedListResponse(e.Id, e.Localize(e.NameAr, e.NameEn), e.Localize(e.AddressAr, e.AddressEn), e.Phone, e.Localize(e.Department.NameAr, e.Department.NameEn));  // sol one
 
             var filterQuerable = _studentServices.FilterStudentsPaginatedQueryable(request.OrderBy, request.SearchAr, request.SearchEn);
-            var PaginatedList = filterQuerable.Select(expression).ToPaginatedListAsync(request.PageNumber, request.PageSize);
+            //var PaginatedList = filterQuerable.Select(expression).ToPaginatedListAsync(request.PageNumber, request.PageSize);          // sol one 
+            //var PaginatedList = filterQuerable.Select(x => new GetStudentPaginatedListResponse(x.Id, x.Localize(x.NameAr, x.NameEn), x.Localize(x.AddressAr, x.AddressEn), x.Phone, x.Localize(x.Department.NameAr, x.Department.NameEn))).ToPaginatedListAsync(request.PageNumber, request.PageSize);  // sol two
+            var PaginatedList = await _mapper.ProjectTo<GetStudentPaginatedListResponse>(filterQuerable).ToPaginatedListAsync(request.PageNumber, request.PageSize);  // sol three using mapping and create class for mapping with name GetStudentListPaginationMapping in Mapping folder 
             return PaginatedList;
         }
 

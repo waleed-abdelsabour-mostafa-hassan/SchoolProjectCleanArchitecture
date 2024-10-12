@@ -12,13 +12,13 @@
 
         public string DepartmentName { get; set; }
 
-        public GetStudentPaginatedListResponse(int id, string name, string address, string phone, string departmentName)
-        {
-            Id = id;
-            Name = name;
-            Address = address;
-            Phone = phone;
-            DepartmentName = departmentName;
-        }
+        //public GetStudentPaginatedListResponse(int id, string name, string address, string phone, string departmentName)
+        //{
+        //    Id = id;
+        //    Name = name;
+        //    Address = address;
+        //    Phone = phone;
+        //    DepartmentName = departmentName;
+        //}
     }
 }
