@@ -36,7 +36,8 @@ namespace SchoolProject.API
             #region Dependency Injections
             builder.Services.AddInfrastructureDependencies()
                             .AddServiceDependencies()
-                            .AddCoreDependencies();
+                            .AddCoreDependencies()
+                            .AddServiceRegisteration();
 
             #endregion
 

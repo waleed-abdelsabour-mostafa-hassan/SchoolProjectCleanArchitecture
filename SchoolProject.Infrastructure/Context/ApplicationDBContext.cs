@@ -1,9 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using SchoolProject.Data.Entities;
+using SchoolProject.Data.Entities.Identity;
 
 namespace SchoolProject.Infrastructure.Context
 {
-    public class ApplicationDBContext : DbContext
+    //IdentityRole<int>, int, IdentityUserClaim<int>, IdentityUserRole<int>, IdentityUserLogin<int>, IdentityRoleClaim<int>, IdentityUserToken<int>
+    public class ApplicationDBContext : IdentityDbContext<User>
     {
         public ApplicationDBContext()
         {
@@ -15,6 +18,7 @@ namespace SchoolProject.Infrastructure.Context
 
         }
 
+        public DbSet<User> users { get; set; }
         public DbSet<Department> departments { get; set; }
         public DbSet<Student> students { get; set; }
         public DbSet<Subject> subjects { get; set; }
