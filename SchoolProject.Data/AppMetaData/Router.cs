@@ -30,5 +30,11 @@
             public const string Delete = Prefix + "/Delete/{id}";
         }
 
+        public static class ApplicationUserRouting
+        {
+            public const string Prefix = Rule + "User";
+            public const string Create = Prefix + "/Create";
+        }
+
     }
 }

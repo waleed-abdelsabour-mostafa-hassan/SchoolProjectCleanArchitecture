@@ -2,7 +2,7 @@
 using SchoolProject.Data.Entities;
 using static SchoolProject.Core.Features.Department.Queries.Results.GetSingleDepartmentResponse;
 
-namespace SchoolProject.Core.Mapping.MappingDepartment
+namespace SchoolProject.Core.Mapping.Departments
 {
     public partial class DepartmentProfile
     {
