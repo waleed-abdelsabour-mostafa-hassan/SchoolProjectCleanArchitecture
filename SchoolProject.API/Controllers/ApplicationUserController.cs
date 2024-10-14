@@ -16,6 +16,13 @@ namespace SchoolProject.API.Controllers
             return NewResult(response);
         }
 
+        [HttpPut(Router.ApplicationUserRouting.Edit)]
+        public async Task<IActionResult> Update([FromBody] EditUserCommand command)
+        {
+            var response = await Mediator.Send(command);
+            return NewResult(response);
+        }
+
         [HttpGet(Router.ApplicationUserRouting.PaginatedList)]
         public async Task<IActionResult> GetPaginatedList([FromQuery] GetUserPaginationListQuery query)
         {

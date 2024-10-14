@@ -36,6 +36,7 @@
             public const string Create = Prefix + "/Create";
             public const string PaginatedList = Prefix + "/PaginatedList";
             public const string GetById = Prefix + SingleRoute;
+            public const string Edit = Prefix + "/Edit";
         }
 
     }
