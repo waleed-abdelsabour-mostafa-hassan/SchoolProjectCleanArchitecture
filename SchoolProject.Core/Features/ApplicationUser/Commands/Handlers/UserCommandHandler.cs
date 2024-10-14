@@ -11,7 +11,8 @@ namespace SchoolProject.Core.Features.ApplicationUser.Commands.Handlers
 {
     public class UserCommandHandler : ResponseHandler,
                                     IRequestHandler<AddUserCommand, Response<string>>,
-                                    IRequestHandler<EditUserCommand, Response<string>>
+                                    IRequestHandler<EditUserCommand, Response<string>>,
+                                    IRequestHandler<DeleteUserCommand, Response<string>>
     {
 
         #region Fields
@@ -65,25 +66,6 @@ namespace SchoolProject.Core.Features.ApplicationUser.Commands.Handlers
             //success
             return Created("");
 
-
-        }
-
-        public async Task<Response<string>> Handle(EditUserCommand request, CancellationToken cancellationToken)
-        {
-            // check if user exist
-            var oldUser = await _userManager.FindByIdAsync(request.Id);
-            // not found
-            if (oldUser == null) { return NotFound<string>(_localizer[SharedResourcesKeys.NotFound]); }
-            // mapping
-            var newUser = _mapper.Map(request, oldUser);
-            // update
-            var UpdateUser = await _userManager.UpdateAsync(newUser);
-            //result is success
-            if (!UpdateUser.Succeeded)
-            {
-                return BadRequest<string>(_localizer[SharedResourcesKeys.UpdateFailed]);
-            }
-            return Success<string>(_localizer[SharedResourcesKeys.Updated]);
 
         }
         #endregion

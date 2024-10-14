@@ -23,6 +23,13 @@ namespace SchoolProject.API.Controllers
             return NewResult(response);
         }
 
+        [HttpDelete(Router.ApplicationUserRouting.Delete)]
+        public async Task<IActionResult> Delete([FromRoute] string id)
+        {
+            var response = await Mediator.Send(new DeleteUserCommand(id));
+            return NewResult(response);
+        }
+
         [HttpGet(Router.ApplicationUserRouting.PaginatedList)]
         public async Task<IActionResult> GetPaginatedList([FromQuery] GetUserPaginationListQuery query)
         {
