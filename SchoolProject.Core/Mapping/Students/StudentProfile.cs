@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace SchoolProject.Core.Mapping.MappingStudent
+namespace SchoolProject.Core.Mapping.Students
 {
     public partial class StudentProfile : Profile
     {
