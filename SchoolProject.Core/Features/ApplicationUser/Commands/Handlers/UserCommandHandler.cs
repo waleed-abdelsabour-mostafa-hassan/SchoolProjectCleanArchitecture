@@ -68,6 +68,38 @@ namespace SchoolProject.Core.Features.ApplicationUser.Commands.Handlers
 
 
         }
+        public async Task<Response<string>> Handle(EditUserCommand request, CancellationToken cancellationToken)
+{
+    // check if user exist
+    var oldUser = await _userManager.FindByIdAsync(request.Id);
+    // not found
+    if (oldUser == null) { return NotFound<string>(_localizer[SharedResourcesKeys.NotFound]); }
+    // mapping
+    var newUser = _mapper.Map(request, oldUser);
+    // update
+    var UpdateUser = await _userManager.UpdateAsync(newUser);
+    //result is success
+    if (!UpdateUser.Succeeded)
+    {
+        return BadRequest<string>(_localizer[SharedResourcesKeys.UpdateFailed]);
+    }
+    return Success<string>(_localizer[SharedResourcesKeys.Updated]);
+
+}
+
+public async Task<Response<string>> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
+{
+    //Check If User Is Exists
+    var user = await _userManager.FindByIdAsync(request.Id);
+    //If Not Exist Not found
+    if (user == null) return NotFound<string>(_localizer[SharedResourcesKeys.NotFound]);
+    //Delete The User
+    var result = await _userManager.DeleteAsync(user);
+    // In Case Of Failure
+    if (!result.Succeeded) return BadRequest<string>(_localizer[SharedResourcesKeys.DeletedFailed]);
+
+    return Deleted<string>(_localizer[SharedResourcesKeys.Deleted]);
+}
         #endregion
     }
 }
